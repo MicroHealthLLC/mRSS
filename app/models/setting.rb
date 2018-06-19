@@ -1,5 +1,5 @@
 class Setting < ApplicationRecord
-
+  mount_uploader :logo, AvatarUploader
   DATE_FORMATS = [
       '%Y-%m-%d',
       '%d/%m/%Y',
