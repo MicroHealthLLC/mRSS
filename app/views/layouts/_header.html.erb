@@ -1,8 +1,10 @@
 <header id="header">
-  <div id="logo-group">
+  <div id="logo-group" style="width: 100% !important;">
 
     <!-- PLACE YOUR LOGO HERE -->
-    <span id="logo1" style="margin: 10px;"> <%= link_to "#{(Setting.first.try(:logo) and Setting.first.try(:logo_url) ) ? image_tag( Setting.first.logo_url, alt: '', size: '30x30' ) : ''} #{Setting['application_name']}".html_safe , root_path %> </span>
+    <span id="logo1" style="margin: 10px;">
+      <%= link_to "#{(Setting.first.try(:logo) and Setting.first.try(:logo_url) ) ? image_tag( Setting.first.logo_url, alt: '', size: '30x30' ) : ''} #{Setting['application_name']}".html_safe , root_path %>
+    </span>
     <!-- END LOGO PLACEHOLDER -->
 
   </div>
