@@ -2,7 +2,7 @@
   <div id="logo-group">
 
     <!-- PLACE YOUR LOGO HERE -->
-    <span id="logo1" style="margin: 10px;"> <%= link_to "#{Setting.first.try(:logo) ? image_tag( Setting.first.logo_url, alt: '', size: '30x30' ) : ''} #{Setting['application_name']}".html_safe , root_path %> </span>
+    <span id="logo1" style="margin: 10px;"> <%= link_to "#{(Setting.first.try(:logo) and Setting.first.try(:logo_url) ) ? image_tag( Setting.first.logo_url, alt: '', size: '30x30' ) : ''} #{Setting['application_name']}".html_safe , root_path %> </span>
     <!-- END LOGO PLACEHOLDER -->
 
   </div>
