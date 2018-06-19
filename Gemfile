@@ -64,4 +64,7 @@ gem 'will_paginate-bootstrap'
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
 
+gem 'carrierwave'
+gem "mini_magick"
+
 
