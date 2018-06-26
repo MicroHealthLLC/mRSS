@@ -1,3 +1,9 @@
 $('#edit_meeting_body').html("<%= escape_javascript(render partial: 'meetings/form', locals: {room: @room, meeting: @meeting}) %>")
 $('#EditMeeting').modal();
 $('.ck-editor').ckeditor(config);
+$('.timepicker').datetimepicker({
+    format: 'LT'
+});
+$('.datepicker').datetimepicker({
+    format: 'YYYY-MM-DD'
+});
