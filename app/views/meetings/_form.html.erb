@@ -40,14 +40,14 @@
       <div class="form-group">
         <%= f.label 'Time start', class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.text_field :time_start , value: (@meeting.time_start || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker' %>
+          <%= f.text_field :time_start , value: (meeting.time_start || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker' %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label 'Time end' , class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.text_field :time_end , value: (@meeting.time_end || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker' %>
+          <%= f.text_field :time_end , value: (meeting.time_end || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker' %>
         </div>
       </div>
 
