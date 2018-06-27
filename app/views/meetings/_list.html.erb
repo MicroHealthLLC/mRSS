@@ -125,13 +125,13 @@
                             $.getScript('/rooms/<%= @room.id %>/meetings/'+event.id+'/edit.js')
                             console.log(event.id)
                         });
-                        element.bind('click', function() {
-                            desc = $('#meeting_'+event.id).html();
-                            $('#content_dialog').html(desc)
-                            $('#dialog').attr('title',  event.title)
-                            $('#link_meeting').attr('href',  event.url_link)
-                            $('#dialog').dialog();
-                        });
+//                        element.bind('click', function() {
+//                            desc = $('#meeting_'+event.id).html();
+//                            $('#content_dialog').html(desc)
+//                            $('#dialog').attr('title',  event.title)
+//                            $('#link_meeting').attr('href',  event.url_link)
+//                            $('#dialog').dialog();
+//                        });
                     },
                     dayRender: function(date, element, view){
                         element.bind('dblclick', function() {
