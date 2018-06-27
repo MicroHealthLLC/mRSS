@@ -124,7 +124,7 @@
                             element.find('.fc-event-title').append("<i class='air air-top-right fa " + event.icon +
                                 " '></i>");
                         }
-                        element.bind('dblclick', function() {
+                        element.bind('click', function() {
                             $.getScript('/rooms/<%= @room.id %>/meetings/'+event.id+'/edit.js')
                             console.log(event.id)
                         });
@@ -137,7 +137,7 @@
 //                        });
                     },
                     dayRender: function(date, element, view){
-                        element.bind('dblclick', function() {
+                        element.bind('click', function() {
                             d = date._d
                             ds = d.getFullYear()+ '-' + (d.getMonth() + 1) + '-'+ d.getDate()
                             $('#meeting_date').val(ds)
@@ -169,7 +169,7 @@
                 }
 
                 function eventRenderCallback(event,element){
-                    element.on("dblclick",function(){
+                    element.on("click",function(){
                         dblClickFunction(event.start)
                     });
                 }
