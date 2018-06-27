@@ -84,6 +84,7 @@
                 $('#calendar').fullCalendar({
                     defaultDate: moment('<%= @date.to_s %>'),
                     header: hdr,
+                    nowIndicator: true,
                     editable: false,
                     droppable: false, // this allows things to be dropped onto the calendar !!!
                     select: function (start, end, allDay) {
@@ -112,6 +113,8 @@
                         },
                         <% end %>
                     ],
+                    dayClick: dayClickCallback,
+//                    eventRender: eventRenderCallback,
                     eventRender: function (event, element, icon) {
                         if (!event.description == "") {
                             element.find('.fc-event-title').append("<br/><span class='ultra-light'>" + event.description +
@@ -150,6 +153,41 @@
                 /* hide default buttons */
                 $('.fc-next-button, .fc-prev-button, .fc-header-right, .fc-today-button').hide();
 
+                var slotDate;
+
+                function dayClickCallback(date){
+                    d = date._d;
+                    console.log(date)
+                    ds = d.getFullYear()+ '-' + (d.getMonth() + 1) + '-'+ d.getDate()
+                    $('#meeting_date').val(ds)
+                    time_start = d.getHours() + ':' +d.getMinutes()
+                    time_end = (d.getHours() + 1) + ':' +d.getMinutes()
+                    $('#meeting_time_start').val(time_start)
+                    $('#meeting_time_end').val(time_end)
+                    $('#NewMeeting').modal()
+//                    $("#calendar").on("mousemove", forgetSlot);
+                }
+
+                function eventRenderCallback(event,element){
+                    element.on("dblclick",function(){
+                        dblClickFunction(event.start)
+                    });
+                }
+
+                function forgetSlot(){
+                    slotDate = null;
+                    $("#calendar").off("mousemove", forgetSlot);
+                }
+
+                function dblClickFunction(date){
+                    alert(date);
+                }
+
+                $("#calendar").dblclick(function() {
+                    if(slotDate){
+                        dblClickFunction(slotDate);
+                    }
+                });
 
 
                 $('#mt').click(function () {
