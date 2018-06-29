@@ -156,11 +156,13 @@
 
                 function dayClickCallback(date){
                     d = date._d;
+                    tzDifference = d.getTimezoneOffset()
+                    d = new Date(d.getTime() + tzDifference * 60 * 1000);
                     console.log(date)
                     ds = d.getFullYear()+ '-' + (d.getMonth() + 1) + '-'+ d.getDate()
                     $('#meeting_date').val(ds)
-                    time_start = tConvert(d.addHours(-1).toTimeString().substr(0, 5))
-                    time_end = tConvert((d).toTimeString().substr(0, 5) )
+                    time_start = tConvert(d.toTimeString().substr(0, 5))
+                    time_end = tConvert((d.addHours(1)).toTimeString().substr(0, 5) )
                     $('#meeting_time_start').val(time_start)
                     $('#meeting_time_end').val(time_end)
                     $('#NewMeeting').modal()
