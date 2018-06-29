@@ -123,7 +123,6 @@
                     ],
                     dayClick: dayClickCallback,
                     eventRender: function (event, element, icon) {
-                        element.html(event.title+" <a data-confirm='Are you sure?' class='pull-right btn btn-danger' rel='nofollow' data-method='delete' href='/rooms/<%=@room.id%>/meetings/"+event.id+"' >Delete</a>");
                         if (!event.description == "") {
                             element.find('.fc-event-title').append("<br/><span class='ultra-light'>" + event.description +
                                 "</span>");
