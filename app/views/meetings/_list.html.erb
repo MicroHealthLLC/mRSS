@@ -34,7 +34,7 @@
               </div>
               <% if @room %>
                   <div class="widget-toolbar" role="menu">
-                    <%= link_to 'New meeting', new_room_meeting_path(@room), class: 'btn btn-xs btn-primary fa fa-calendar' %>
+                    <%= link_to 'New meeting', '#', class: 'btn btn-xs btn-primary fa fa-calendar modal-trigger', data: {modal: '#NewMeeting' } %>
                   </div>
               <% end %>
 
@@ -50,15 +50,7 @@
                   <div id="calendar-buttons">
 
                     <div class="btn-group">
-                      <% if @room %>
-                          <a href="<%= room_path(@room, :start_date=> @date.beginning_of_month.prev_month ) %>" class="btn btn-default btn-xs" id="btn-prev"><i class="fa fa-chevron-left"></i></a>
-                          <a href="<%= room_path(@room, :start_date=> @date.beginning_of_month.next_month ) %>" class="btn btn-default btn-xs" id="btn-next"><i class="fa fa-chevron-right"></i></a>
 
-                      <% else %>
-                          <a href="<%= meetings_path(:start_date=> @date.beginning_of_month.prev_month ) %>" class="btn btn-default btn-xs" id="btn-prev"><i class="fa fa-chevron-left"></i></a>
-                          <a href="<%= meetings_path(:start_date=> @date.beginning_of_month.next_month ) %>" class="btn btn-default btn-xs" id="btn-next"><i class="fa fa-chevron-right"></i></a>
-
-                      <% end %>
                     </div>
                   </div>
                 </div>
@@ -74,6 +66,21 @@
 
         </div>
         <script>
+            Date.prototype.addHours = function(h) {
+                this.setTime(this.getTime() + (h*60*60*1000));
+                return this;
+            }
+            function tConvert (time) {
+                // Check correct time format and split into components
+                time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+                if (time.length > 1) { // If time format correct
+                    time = time.slice (1);  // Remove full string match value
+                    time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+                    time[0] = +time[0] % 12 || 12; // Adjust hours
+                }
+                return time.join (''); // return adjusted time or original string
+            }
             $(document).ready(function() {
                 var date = new Date("<%= @date.to_s %>");
 
@@ -114,8 +121,8 @@
                         <% end %>
                     ],
                     dayClick: dayClickCallback,
-//                    eventRender: eventRenderCallback,
                     eventRender: function (event, element, icon) {
+                        element.html(event.title+" <a data-confirm='Are you sure?' class='pull-right btn btn-danger' rel='nofollow' data-method='delete' href='/rooms/<%=@room.id%>/meetings/"+event.id+"' >Delete</a>");
                         if (!event.description == "") {
                             element.find('.fc-event-title').append("<br/><span class='ultra-light'>" + event.description +
                                 "</span>");
@@ -126,15 +133,7 @@
                         }
                         element.bind('click', function() {
                             $.getScript('/rooms/<%= @room.id %>/meetings/'+event.id+'/edit.js')
-                            console.log(event.id)
                         });
-//                        element.bind('click', function() {
-//                            desc = $('#meeting_'+event.id).html();
-//                            $('#content_dialog').html(desc)
-//                            $('#dialog').attr('title',  event.title)
-//                            $('#link_meeting').attr('href',  event.url_link)
-//                            $('#dialog').dialog();
-//                        });
                     },
                     dayRender: function(date, element, view){
                         element.bind('click', function() {
@@ -151,7 +150,7 @@
                 });
                 $('#calendar').fullCalendar('changeView', 'agendaDay');
                 /* hide default buttons */
-                $('.fc-next-button, .fc-prev-button, .fc-header-right, .fc-today-button').hide();
+//                $('.fc-next-button, .fc-prev-button, .fc-header-right, .fc-today-button').hide();
 
                 var slotDate;
 
@@ -160,8 +159,8 @@
                     console.log(date)
                     ds = d.getFullYear()+ '-' + (d.getMonth() + 1) + '-'+ d.getDate()
                     $('#meeting_date').val(ds)
-                    time_start = d.getHours() + ':' +d.getMinutes()
-                    time_end = (d.getHours() + 1) + ':' +d.getMinutes()
+                    time_start = tConvert(d.addHours(-1).toTimeString().substr(0, 5))
+                    time_end = tConvert((d).toTimeString().substr(0, 5) )
                     $('#meeting_time_start').val(time_start)
                     $('#meeting_time_end').val(time_end)
                     $('#NewMeeting').modal()
@@ -213,8 +212,6 @@
   <% @meetings.each do |meeting| %>
       <span id="meeting_<%= meeting.id %>"><%= meeting.description.to_s.html_safe %></span>
   <% end %>
-
-
 </div>
 <p id="dialog" title="" hidden>
   <a id="link_meeting" href='' class="btn btn-default pull-right"> link</a>

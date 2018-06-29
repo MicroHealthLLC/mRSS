@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @date = params[:start_date] ? Date.strptime(params[:start_date]) : Date.today
-    @meetings = @room.meetings.for_month(@date)
+    @meetings = @room.meetings #.for_month(@date)
   end
 
   # GET /rooms/new

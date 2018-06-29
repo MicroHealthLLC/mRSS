@@ -29,10 +29,12 @@ class MeetingsController < ApplicationController
 
     respond_to do |format|
       if @meeting.save
-        format.html { redirect_to @room, notice: 'Meeting was successfully created.' }
+        format.js { render js: 'window.location.reload()' }
         format.json { render :show, status: :created, location: @meeting }
       else
-        format.html { render :new }
+        format.js {
+          render js: "alert('#{@meeting.errors.full_messages.join('\n').html_safe}')"
+        }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
     end

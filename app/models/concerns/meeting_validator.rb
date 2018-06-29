@@ -6,7 +6,10 @@ class MeetingValidator < ActiveModel::Validator
         record.errors[:base]<< 'Time is not available for this room'
       end
 
-      if record.date < Date.today
+
+      time_start = record.time_start + (record.date - record.time_start.to_date).to_i.days
+      
+      if time_start < Time.now
         record.errors[:base]<<  'Cannot save meeting from the past'
       end
       if record.time_end < record.time_start

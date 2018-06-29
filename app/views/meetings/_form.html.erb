@@ -1,6 +1,6 @@
-<fieldset style="height: 90vh">
+<fieldset>
   <legend></legend>
-  <%= form_for([@room, meeting], html: { class: 'form-horizontal'}) do |f| %>
+  <%= form_for([@room, meeting], remote: true, html: { class: 'form-horizontal'}) do |f| %>
 
       <% if meeting.errors.any? %>
           <div id="error_explanation">
@@ -33,7 +33,7 @@
       <div class="form-group">
         <%= f.label 'Date', class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.text_field :date , class: 'form-control datepicker' %>
+          <%= f.text_field :date , class: 'form-control meetingdatepicker', style: "position:relative" %>
         </div>
       </div>
 
@@ -47,15 +47,14 @@
       <div class="form-group">
         <%= f.label 'Time end' , class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.text_field :time_end , value: (meeting.time_end || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker' %>
+          <%= f.text_field :time_end , value: (meeting.time_end || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker', style: "position:relative" %>
         </div>
       </div>
 
       <div class="form-group" >
         <div class="col-md-11">
-          <% if request.format == 'html' %>
-              <%= link_to 'Cancel', room_path(@room), class: 'btn btn-warning pull-right' %>
-          <% end %>
+
+          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal' %>
           <%= f.submit 'Save', class: 'btn btn-success pull-right' %>
         </div>
       </div>

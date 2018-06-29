@@ -61,7 +61,7 @@ $( ".fb-select.form-group select" ).select2("destroy");
 $('.timepicker').datetimepicker({
     format: 'LT'
 });
-$('.datepicker').datetimepicker({
+$('.meetingdatepicker').datetimepicker({
     format: 'YYYY-MM-DD'
 });
 
@@ -69,4 +69,8 @@ $('.modal-trigger').on('click', function(e) {
     e.preventDefault();
     modal_id = $(this).data('modal')
     $(modal_id).modal('show');
+})
+$('.cancel_meeting_modal').on('click', function(e) {
+    e.preventDefault();
+    $('.modal').modal('hide');
 })
