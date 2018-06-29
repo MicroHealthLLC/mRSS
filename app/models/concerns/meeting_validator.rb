@@ -9,7 +9,7 @@ class MeetingValidator < ActiveModel::Validator
 
       time_start = record.time_start + (record.date - record.time_start.to_date).to_i.days
       
-      if time_start < Time.now
+      if Time.parse(time_start.strftime("%H:%M"), record.date.to_time)  < Time.now
         record.errors[:base]<<  'Cannot save meeting from the past'
       end
       if record.time_end < record.time_start
