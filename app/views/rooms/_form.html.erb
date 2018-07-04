@@ -45,6 +45,9 @@
 
       <div class="form-group" >
         <div class="col-md-11">
+          <%if room.persisted?%>
+          <%= link_to 'Delete', room_path, method: :delete, data: {confirm: 'Are you sure to delete this room?'}, class: 'btn btn danger pull-right' %>
+          <% end %>
           <%= link_to 'Cancel', rooms_path, class: 'btn btn-warning pull-right' %>
           <%= f.submit 'Save', class: 'btn btn-success pull-right' %>
         </div>
