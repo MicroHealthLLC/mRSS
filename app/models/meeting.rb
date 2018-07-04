@@ -1,7 +1,8 @@
 class Meeting < ApplicationRecord
   belongs_to :room, optional: true
-  validates_presence_of :room_id, :date, :time_start, :time_end, :name
-  validates_uniqueness_of :name, scope: [:room_id, :date]
+  has_many :meeting_dates, dependent: :destroy
+  validates_presence_of :room_id, :time_start, :time_end, :name
+  # validates_uniqueness_of :name, scope: [:room_id, :date]
 
   include ActiveModel::Validations
   validates_with MeetingValidator

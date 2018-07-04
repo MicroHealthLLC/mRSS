@@ -12,6 +12,7 @@
 //
 //= require jquery2
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //   JQUERY VALIDATE -->
 //=  require plugin/jquery-validate/jquery.validate.min.js

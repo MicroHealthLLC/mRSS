@@ -26,7 +26,9 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = Meeting.new(meeting_params)
-
+    params[:date].to_s.split(',').each do |md|
+      @meeting.meeting_dates.build(date: md)
+    end
     respond_to do |format|
       if @meeting.save
         format.js { render js: 'window.location.reload()' }
@@ -44,6 +46,12 @@ class MeetingsController < ApplicationController
   # PATCH/PUT /meetings/1.json
   def update
     @meeting.attributes = meeting_params
+    @meeting.meeting_dates.delete_all
+    dates = params[:date].to_s.split(',')
+    @meeting.meeting_dates.where.not(date: dates).delete_all
+    dates.each do |md|
+      @meeting.meeting_dates.where(date: md).first_or_initialize
+    end
     respond_to do |format|
       if @meeting.valid? and @meeting.save
         format.html { redirect_to @room, notice: 'Meeting was successfully updated.' }

@@ -39,4 +39,5 @@
  *
  * Lock screen related styles
  *= require lockscreen
+ *= require jquery-ui.multidatespicker
  */

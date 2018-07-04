@@ -30,10 +30,11 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" >
         <%= f.label 'Date', class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.text_field :date , class: 'form-control meetingdatepicker', style: "position:relative" %>
+          <div class="mdp"></div>
+          <%= text_field_tag :date, meeting.meeting_dates.map(&:date).map(&:to_date), class: 'date form-control', style: "position:relative; display: none" %>
         </div>
       </div>
 

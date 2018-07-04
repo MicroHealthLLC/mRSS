@@ -61,9 +61,17 @@ $( ".fb-select.form-group select" ).select2("destroy");
 $('.timepicker').datetimepicker({
     format: 'LT'
 });
-$('.meetingdatepicker').datetimepicker({
-    format: 'YYYY-MM-DD'
-});
+//$('.meetingdatepicker').multiDatesPicker({
+//    displayClose:true,
+//    closeOnSelect:false
+//});
+$('.mdp').multiDatesPicker({
+    dateFormat: "yy-mm-dd",
+    altField: '.date',
+    minDate: 0,
+    "prevText":'<i class="fa fa-chevron-left"></i>',
+    "nextText":'<i class="fa fa-chevron-right"></i>'
+})
 
 $('.modal-trigger').on('click', function(e) {
     e.preventDefault();
