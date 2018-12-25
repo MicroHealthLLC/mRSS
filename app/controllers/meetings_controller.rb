@@ -35,7 +35,6 @@ class MeetingsController < ApplicationController
         format.json { render :show, status: :created, location: @meeting }
       else
         format.js {
-          render js: "alert('#{@meeting.errors.full_messages.join('\n').html_safe}')"
         }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
@@ -56,7 +55,9 @@ class MeetingsController < ApplicationController
       if @meeting.valid? and @meeting.save
         format.html { redirect_to @room, notice: 'Meeting was successfully updated.' }
         format.json { render :show, status: :ok, location: @meeting }
+        format.js { render js: 'window.location.reload()' }
       else
+        format.js {}
         format.html { render :edit }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end

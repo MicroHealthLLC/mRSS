@@ -2,17 +2,9 @@
   <legend></legend>
   <%= form_for([@room, meeting], remote: true, html: { class: 'form-horizontal'}) do |f| %>
 
-      <% if meeting.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
 
-            <ul>
-              <% meeting.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-              <% end %>
-            </ul>
           </div>
-      <% end %>
 
       <div class="form-group">
         <%= f.label 'Title', class: 'col-md-2 control-label' %>
@@ -57,7 +49,7 @@
           <%if meeting.persisted?%>
           <%= link_to 'Delete', room_meeting_path(@room, meeting), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger pull-right' %>
           <%end %>
-          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal' %>
+          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal', onclick: "$('.modal').modal('hide');" %>
           <%= f.submit 'Save', class: 'btn btn-success pull-right' %>
         </div>
       </div>
