@@ -14,9 +14,11 @@ gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703
 
 \curl -sSL https://get.rvm.io | bash -s stable
 
-usermod -a -G rvm `whoami'
+usermod -a -G rvm `username'
 
 export PATH="$PATH:$HOME/.rvm/bin"
+
+log out then log back in
 
 rvm install ruby-2.3.6
 
