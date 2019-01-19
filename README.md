@@ -31,6 +31,11 @@ yum install mariadb-server mariadb
 
 yum install mysql-devel
 
+systemctl start mariadb
+systemctl enable mariadb
+
+mysql_secure_installation
+
 mysql -u root -p
 
 create database mrss_prod CHARACTER SET utf8 COLLATE utf8_general_ci;
