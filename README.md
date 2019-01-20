@@ -97,6 +97,8 @@ yum update
 
 yum install -y nginx
 
+sudo systemctl enable nginx
+
 # install passenger phusion
 
 yum install -y pygpgme curl
