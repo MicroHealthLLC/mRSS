@@ -113,6 +113,17 @@ nano /etc/nginx/conf.d/passenger.conf
 passenger_ruby /usr/local/rvm/gems/ruby-2.3.6/wrappers/ruby;
 
 --uncomment the line above and the line below along with the passenger_ruby line e.g. remove this"#"
+
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+# edit nginx.conf
+nano /etc/nginx/nginx.conf
+add these
+
+        passenger_enabled on;
+        rails_env production;
+
+
 # restart nginx
 service nginx restart
 
