@@ -7,7 +7,7 @@
           </div>
 
       <div class="form-group">
-        <%= f.label 'Title', class: 'col-md-2 control-label' %>
+        <%= f.label 'Title', class: 'col-md-3 control-label' %>
         <div class="col-md-9">
           <%= f.hidden_field :room_id  %>
           <%= f.text_field :name , class: 'form-control' %>
@@ -16,14 +16,14 @@
 
 
       <div class="form-group">
-        <%= f.label 'Description' , class: 'col-md-2 control-label' %>
+        <%= f.label 'Description' , class: 'col-md-3 control-label' %>
         <div class="col-md-9">
           <%= f.text_area :description , class: 'form-control ck-editor' %>
         </div>
       </div>
 
       <div class="form-group" >
-        <%= f.label 'Date', class: 'col-md-2 control-label' %>
+        <%= f.label 'Date', class: 'col-md-3 control-label' %>
         <div class="col-md-9">
           <div class="mdp"></div>
           <% if meeting.new_record?
@@ -35,21 +35,21 @@
       </div>
 
       <div class="form-group">
-        <%= f.label 'Time start', class: 'col-md-2 control-label' %>
+        <%= f.label 'Time start', class: 'col-md-3 control-label' %>
         <div class="col-md-9">
           <%= f.text_field :time_start , value: (meeting.time_start || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker' %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label 'Time end' , class: 'col-md-2 control-label' %>
+        <%= f.label 'Time end' , class: 'col-md-3 control-label' %>
         <div class="col-md-9">
           <%= f.text_field :time_end , value: (meeting.time_end || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker', style: "position:relative" %>
         </div>
       </div>
 
       <div class="form-group" >
-        <div class="col-md-11">
+        <div class="col-md-12">
           <%if meeting.persisted?%>
           <%= link_to 'Delete', room_meeting_path(@room, meeting), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger pull-right' %>
           <%end %>

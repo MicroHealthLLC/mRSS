@@ -10,12 +10,15 @@ yum clean all && sudo yum update -y
 
 # install ruby
 
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 
-\curl -sSL https://get.rvm.io | bash -s stable --ruby 
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
-usermod -a -G rvm `whoami'
+curl -sSL https://get.rvm.io | sudo bash -s stable
+
+usermod -a -G rvm `username'
 
 export PATH="$PATH:$HOME/.rvm/bin"
+
+log out then log back in
 
 rvm install ruby-2.3.6
 
@@ -27,6 +30,12 @@ bash -l -c "rvm use 2.3.6 --default"
 yum install mariadb-server mariadb
 
 yum install mysql-devel
+
+systemctl start mariadb
+
+systemctl enable mariadb
+
+mysql_secure_installation
 
 mysql -u root -p
 
@@ -88,6 +97,8 @@ yum update
 
 yum install -y nginx
 
+sudo systemctl enable nginx
+
 # install passenger phusion
 
 yum install -y pygpgme curl
@@ -104,6 +115,17 @@ nano /etc/nginx/conf.d/passenger.conf
 passenger_ruby /usr/local/rvm/gems/ruby-2.3.6/wrappers/ruby;
 
 --uncomment the line above and the line below along with the passenger_ruby line e.g. remove this"#"
+
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+# edit nginx.conf
+nano /etc/nginx/nginx.conf
+add these
+
+        passenger_enabled on;
+        rails_env production;
+
+
 # restart nginx
 service nginx restart
 
