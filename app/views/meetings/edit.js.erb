@@ -2,13 +2,6 @@ $('#edit_meeting_body').html("<%= escape_javascript(render partial: 'meetings/fo
 $('#EditMeeting').modal();
 $('.ck-editor').ckeditor(config);
 $('.timepicker').datetimepicker({
-    format: 'LT'
+    format: 'LT',
+    minDate: moment({h: 7})
 });
-$('.mdp').multiDatesPicker({
-    dateFormat: "yy-mm-dd",
-    altField: '.date',
-    addDates: <%= raw @meeting.meeting_dates.map(&:date).map(&:to_date).map(&:to_s) %>,
-    minDate: 0,
-    "prevText":'<i class="fa fa-chevron-left"></i>',
-    "nextText":'<i class="fa fa-chevron-right"></i>'
-})
