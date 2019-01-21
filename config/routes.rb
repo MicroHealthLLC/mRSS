@@ -1,5 +1,28 @@
 Rails.application.routes.draw do
 
+  devise_for :users, :controllers => { omniauth_callbacks: 'callbacks' }
+  resources :users, only: [:index, :show, :destroy] do
+    collection do
+      match 'active', via: [:post, :get]
+      match 'audit', via: [ :get]
+    end
+    member do
+      get 'require_change_password'
+      get 'restore'
+      get 'lock'
+      get 'unlock'
+      put 'change_password'
+      put 'change_basic_info'
+      put 'attachments'
+      post 'image_upload'
+      get 'remove_image'
+    end
+
+    resources :core_demographics, only: [:create, :update]
+    resources :user_extend_demographies, only: [:create, :update], controller: :extend_demographies
+
+  end
+
   resources :rooms do
     resources :meetings, except: [:new]
   end

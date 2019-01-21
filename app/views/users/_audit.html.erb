@@ -1,0 +1,34 @@
+<table style="width: 100%" class="table  table-responsive" id="users_table">
+  <thead>
+  <tr>
+
+    <th><%= t :email %></th>
+    <th> compteur de connexion </th>
+    <th> Dernière connexion</th>
+    <th> Dernière connexion à IP</th>
+    <th> Tentatives infructueuses</th>
+    <th> Verrouillé à </th>
+  </tr>
+  </thead>
+
+
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.sign_in_count %></td>
+        <td><%= format_date_time user.last_sign_in_at %></td>
+        <td><%=  user.last_sign_in_ip %></td>
+        <td><%=  user.failed_attempts %></td>
+        <td><%=  format_date_time user.locked_at %></td>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script>
+  $(document).on('turbolinks:load', function(){
+    initDataTable('users_table')
+  })
+</script>

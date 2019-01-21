@@ -11,6 +11,10 @@ module ApplicationHelper
     locale_list.detect {|entry| entry[:locale] == locale}
   end
 
+  def can_connect_with?(type)
+    Setting["#{type}_KEY".upcase].present?
+  end
+
   def locale_list
     [
       {

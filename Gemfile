@@ -1,4 +1,4 @@
-ruby '2.3.6'
+ruby '2.3.4'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -57,6 +57,13 @@ gem 'ckeditor_rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 gem 'turbolinks'
+gem 'devise'
+gem "omniauth-office365", github: 'jcarbo/omniauth-office365'
+gem "omniauth-facebook"
+gem "omniauth-github"
+gem "omniauth-twitter"
+gem "omniauth-google-oauth2"
+
 
 
 gem 'will_paginate'

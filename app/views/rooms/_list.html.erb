@@ -7,7 +7,7 @@
   <tbody>
   <% @rooms.each do |room| %>
       <tr data-open-url="<%= room_path(room) %>">
-        <td><%= room.name %></td>
+        <td class="room_uppercase"><%= room.name %></td>
       </tr>
   <% end %>
   </tbody>
