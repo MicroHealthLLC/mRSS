@@ -1,34 +1,21 @@
 Rails.application.routes.draw do
-
+  resources :users, only: [:create]
   devise_for :users, :controllers => { omniauth_callbacks: 'callbacks' }
-  resources :users, only: [:index, :show, :destroy] do
-    collection do
-      match 'active', via: [:post, :get]
-      match 'audit', via: [ :get]
-    end
+  resources :users, except: [:edit, :update] do
     member do
-      get 'require_change_password'
-      get 'restore'
-      get 'lock'
-      get 'unlock'
       put 'change_password'
-      put 'change_basic_info'
-      put 'attachments'
-      post 'image_upload'
-      get 'remove_image'
     end
 
     resources :core_demographics, only: [:create, :update]
     resources :user_extend_demographies, only: [:create, :update], controller: :extend_demographies
 
   end
-
   resources :rooms do
     resources :meetings, except: [:new]
   end
   get 'fetch/:action', controller: 'fetch'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'rooms#index'
+  root 'home#index'
   # Miscellaneous
   get 'miscellaneous/login',
       to: 'miscellaneous#login',

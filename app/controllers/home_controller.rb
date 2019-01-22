@@ -3,4 +3,9 @@ class HomeController < ApplicationController
     session[:locale] = params[:locale]
     redirect_to :back
   end
+
+
+  def index
+
+  end
 end

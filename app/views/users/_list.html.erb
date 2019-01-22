@@ -2,15 +2,11 @@
   <thead>
   <tr id="users_input">
     <th>#</th>
-    <th><%= t :email %></th>
-    <th> <%= t('profile.first_name') %> </th>
-    <th> <%= t('profile.last_name') %> </th>
-    <th> <%= t('role') %> </th>
-    <td></td>
+    <th>Email</th>
+    <th> login </th>
 
     <td></td>
     <td></td>
-
   </tr>
   </thead>
 
@@ -21,14 +17,9 @@
         <td> <%=  user.email %></td>
         <td> <%=  user.login %></td>
 
-        <td><%#= delete_link(user, 'data-turbolinks'=> false) %></td>
+        <td><%= edit_link(user, 'data-turbolinks'=> false) %></td>
+        <td><%= delete_link(user, 'data-turbolinks'=> false) %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
-
-<script>
-    $(document).on('turbolinks:load', function(){
-        initDataTable('users_table')
-    } );
-</script>

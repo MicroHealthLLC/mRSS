@@ -7,15 +7,8 @@ class SettingsController < ApplicationController
   end
 
   def create
-    @setting = Setting.first || Setting.new
-    @setting.attributes= setting_params
-    if params[:logo]
-      @setting = Setting.first || Setting.new
-      @setting.logo = params[:logo]
-    end
-    @setting.save
-
     Setting['application_name'] = params['application_name']
+    Setting['home_page_content'] = params['home_page_content']
     redirect_to settings_path
   end
 
@@ -34,11 +27,4 @@ class SettingsController < ApplicationController
 
     redirect_to settings_path
   end
-
-  private
-
-  def setting_params
-    params.require(:setting).permit(:home_page_content)
-  end
-
 end

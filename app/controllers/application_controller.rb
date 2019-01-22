@@ -9,4 +9,12 @@ class ApplicationController < ActionController::Base
   # def user_time_zone(&block)
   #   Time.use_zone(User.current.time_zone, &block)
   # end
+  def set_user
+    if user_signed_in?
+        User.current = current_user
+    end
+  rescue ActiveRecord::RecordNotFound
+    render_404
+  end
+
 end

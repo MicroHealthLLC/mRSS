@@ -66,6 +66,7 @@ gem "omniauth-google-oauth2"
 
 
 
+gem "request_store"
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'jquery-datatables-rails'

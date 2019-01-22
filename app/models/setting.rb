@@ -73,7 +73,7 @@ class Setting < ApplicationRecord
     unless setting
       setting = new
       setting.setting_type = name
-      setting.value = available_settings[name]['default']
+      setting.value = available_settings.dig(name, 'default')
     end
     setting
   end

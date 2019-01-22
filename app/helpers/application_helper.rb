@@ -138,4 +138,30 @@ module ApplicationHelper
     ]
   end
 
+  def delete_link(url, options={})
+    options = {
+        :method => :delete,
+        :data => {:confirm => t(:text_are_you_sure)}
+    }.merge(options)
+
+    link_to "<i class='fa fa-lg fa-trash-o'></i>".html_safe, url, options
+  end
+
+  def edit_link(url, options={})
+    link_to "<i class='fa fa-lg fa-edit'></i>".html_safe, url, options
+  end
+
+  # Renders tabs and their content
+  def render_tabs(tabs, selected=params[:tab], tab_name= "tabs-shared")
+    if tabs.any?
+      unless tabs.detect {|tab| tab[:name] == selected}
+        selected = nil
+      end
+      selected ||= tabs.first[:name]
+      render :partial => 'shared/tabs', :locals => {tab_name: tab_name, :tabs => tabs, :selected_tab => selected}
+    else
+      content_tag 'p', t(:label_no_data), :class => "nodata"
+    end
+  end
+
 end

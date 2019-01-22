@@ -29,4 +29,17 @@ class User < ApplicationRecord
     end
   end
 
+  def self.current=(user)
+    RequestStore.store[:current_user] = user
+  end
+
+  def self.current
+    RequestStore.store[:current_user] ||= User.new
+  end
+
+  def name
+    login
+  end
+  alias :to_s :name
+
 end
