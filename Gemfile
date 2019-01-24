@@ -2,7 +2,7 @@ ruby '2.3.4'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.1.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -74,5 +74,14 @@ gem 'ajax-datatables-rails'
 
 gem 'carrierwave'
 gem "mini_magick"
+
+
+group :test do
+  gem 'database_cleaner'
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper', '~> 1.0'
+  gem 'minitest-retry'
+end
 
 
