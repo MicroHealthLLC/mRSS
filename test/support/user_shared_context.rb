@@ -14,8 +14,8 @@ module Support
     end
 
     def user_is_signed_in
-      assert_equal current_url, root_url
-    endS    
+      assert_equal true, page.has_current_path?('/')
+    end
 
     def user_sign_in login, password
         visit new_user_session_url

@@ -4,6 +4,8 @@ require 'minitest/retry'
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include Devise::Test::IntegrationHelpers
+  include Support::RoomsHelper
+
   include Support::UserSharedContext
   include Support::WaitForAjax
 
