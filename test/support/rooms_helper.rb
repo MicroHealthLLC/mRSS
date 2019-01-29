@@ -1,6 +1,9 @@
 module Support
   module RoomsHelper
 
+    def i_go_to_meetings
+      visit root_url
+    end
     def i_go_to_rooms
       visit rooms_url
     end

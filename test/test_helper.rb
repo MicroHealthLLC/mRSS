@@ -2,9 +2,10 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'database_cleaner'
 require 'support/wait_for_ajax'
+require 'support/javascript_driver'
 require 'support/user_shared_context'
-require 'support/rooms_helper'
-
+require 'support/rooms_helper' 
+require 'support/meeting_helper'
 
 
 
