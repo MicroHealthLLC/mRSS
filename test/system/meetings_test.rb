@@ -18,7 +18,7 @@ class MeetingsTest < ApplicationSystemTestCase
     the_meeting_cannot_be_created_in_the_past
     i_cancel_booking
     i_book_meeting_to_day_next_hour('Other meeting')
-    the_meeting_time_is_not_available
+    the_meeting_time_is_not_available([Date.today])
   end
   
   

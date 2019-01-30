@@ -3,7 +3,7 @@ module Support
 
     def book_meeting params
       calendar = page.find(:css, 'div#calendar')
-      calendar.find(:css,".fc-day-grid  td[class='fc-day fc-widget-content fc-tue fc-today fc-state-highlight']").click
+      calendar.first(:css,".fc-day").click
       i_fill_meeting_form(params)
     end
 
@@ -11,8 +11,7 @@ module Support
       cancel_link = find("a", text: "Cancel", visible: false)
       scroll_to(cancel_link)
       cancel_link.click
-      wait_for_ajax
-      
+      sleep 2
     end
 
     def i_fill_meeting_form(params)
@@ -54,8 +53,8 @@ module Support
       assert_selector(:xpath, "//ul[li]", text: 'Cannot save meeting from the past')
     end
     
-    def the_meeting_time_is_not_available
-      error = "Time is not available for this room for these dates [#{DateTime.now.to_date}]"
+    def the_meeting_time_is_not_available dates
+      error = "Time is not available for this room for these dates #{dates.map(&:to_date)}"
       assert_selector(:xpath, "//ul[li]", text: error)
     end
   end
