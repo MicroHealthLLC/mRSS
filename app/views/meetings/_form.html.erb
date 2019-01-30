@@ -53,7 +53,7 @@
           <%if meeting.persisted?%>
           <%= link_to 'Delete', room_meeting_path(@room, meeting), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger pull-right' %>
           <%end %>
-          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal', onclick: "reset(); $('.modal').modal('hide');" %>
+          <%= link_to 'Cancel', '#', {class: 'btn btn-warning pull-right cancel_meeting_modal', data: { dismiss: 'modal' }} %>
           <%= f.submit 'Save', class: 'btn btn-success pull-right' %>
         </div>
       </div>
@@ -61,10 +61,14 @@
 </fieldset>
 
 <script>
-  function reset(){
+  function resetModal(){
       $('#error_explanation').html('');
+      $('.mdp').multiDatesPicker('resetDates', 'picked');
+      $('.mdp').multiDatesPicker('addDates', [new Date()]);
   }
-
+  $('#EditMeeting, #NewMeeting').on('hidden.bs.modal', function () {
+    resetModal();
+  })
   $('.mdp').multiDatesPicker({
       dateFormat: "yy-mm-dd",
       altField: '.date',
