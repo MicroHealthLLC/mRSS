@@ -24,7 +24,16 @@
         </span>
         </div>
         <!-- end logout button -->
-
+    <% else %>
+        <!-- login button -->
+        <div id="login" class="btn-header transparent pull-right">
+        <span>
+          <%= link_to(new_user_session_path, title: 'Sign In') do %>
+            <i class="fa fa-sign-in"></i>
+          <% end %>
+        </span>
+        </div>
+        <!-- end login button -->
     <% end %>
     <!-- collapse menu button -->
 
