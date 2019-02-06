@@ -130,3 +130,9 @@ add these
 service nginx restart
 
 
+# Setup page
+https://your-url/settings
+
+login with the temporary username admin with password Admin@2019
+
+Change configure and customize your app

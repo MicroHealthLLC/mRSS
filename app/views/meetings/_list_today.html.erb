@@ -2,7 +2,7 @@
 <table class="table table-responsive table-hover table-bordered">
   <% @meetings.each do |room_id, meetings| %>
   <tr>
-    <td colspan="3" class="room_uppercase">Room: <%= Room.find(room_id).name %></td>
+    <td colspan="3" class="room_uppercase">Room: <strong><%= Room.find(room_id).name %></strong></td>
   </tr>
       <% meetings.each do |meeting| %>
           <tr>
