@@ -37,17 +37,22 @@
             </div>
           </div>
 
+          <% times =  (7..11).map{|hour| ["#{hour}:00AM", "#{hour}:10AM", "#{hour}:20AM", "#{hour}:30AM", "#{hour}:40AM", "#{hour}:50AM"] } %>
+          <% times += (12..12).map{|hour| ["#{hour}:00PM", "#{hour}:10PM", "#{hour}:20PM", "#{hour}:30PM", "#{hour}:40PM", "#{hour}:50PM"] } %>
+          <% times += (13..23).map{|h| hour = h -12
+          ["#{hour}:00PM", "#{hour}:10PM", "#{hour}:20PM", "#{hour}:30PM", "#{hour}:40PM", "#{hour}:50PM"] } %>
+          <% times.flatten! %>
           <div class="form-group">
             <%= f.label 'Time start', class: 'col-md-3 control-label' %>
             <div class="col-md-9">
-              <%= f.text_field :time_start , value: (meeting.time_start || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker' %>
+              <%= f.select 'time_start', options_for_select(times, selected: (meeting.time_start || Time.now).strftime('%I:%M%p').gsub(/^0/, '')) %>
             </div>
           </div>
 
           <div class="form-group">
             <%= f.label 'Time end' , class: 'col-md-3 control-label' %>
             <div class="col-md-9">
-              <%= f.text_field :time_end , value: (meeting.time_end || Time.now).strftime('%I:%M%p'), class: 'form-control timepicker', style: "position:relative" %>
+              <%= f.select :time_end, options_for_select(times, selected: (meeting.time_end || Time.now).strftime('%I:%M%p').gsub(/^0/, '')) %>
             </div>
           </div>
         </div>

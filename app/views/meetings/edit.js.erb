@@ -1,7 +1,5 @@
 $('#edit_meeting_body').html("<%= escape_javascript(render partial: 'meetings/form', locals: {room: @room, meeting: @meeting}) %>")
 $('#EditMeeting').modal();
 $('.ck-editor').ckeditor(config);
-$('.timepicker').datetimepicker({
-    format: 'LT',
-    minDate: moment({h: 7})
-});
+$('select').select2();
+$('.select2').css('width', '100%');

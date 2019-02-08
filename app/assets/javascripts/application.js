@@ -31,12 +31,11 @@
 //= require plugin/select2/select2.min.js
 
 //= require moment
-//= require bootstrap-datetimepicker
-
 //= require turbolinks
 //= require settings
 //= require open_url
 //= require plugin/fullcalendar/jquery.fullcalendar.min
+
 
 
 
