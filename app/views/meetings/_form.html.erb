@@ -37,7 +37,7 @@
             </div>
           </div>
 
-          <% times =  (7..11).map{|hour| ["#{hour}:00AM", "#{hour}:15AM", "#{hour}:30AM", "#{hour}:45AM"] } %>
+          <% times =  (6..11).map{|hour| ["#{hour}:00AM", "#{hour}:15AM", "#{hour}:30AM", "#{hour}:45AM"] } %>
           <% times += (12..12).map{|hour| ["#{hour}:00PM", "#{hour}:15PM", "#{hour}:30PM", "#{hour}:45PM"] } %>
           <% times += (13..23).map{|h| hour = h -12
           ["#{hour}:00PM", "#{hour}:15PM", "#{hour}:30PM", "#{hour}:45PM"] } %>
