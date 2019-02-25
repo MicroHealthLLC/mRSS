@@ -28,7 +28,7 @@ class MeetingValidator < ActiveModel::Validator
           record.errors[:base]<<  'Cannot save meeting from the past'
         end
       end
-      if record.time_end < record.time_start
+      if record.time_end <= record.time_start
         record.errors[:time_start] <<  'should be before end time'
       end
 
