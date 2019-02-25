@@ -1,5 +1,5 @@
 <% if current_user %>
-    <%= link_to 'New Room', new_room_path, class: 'btn btn-primary pull-right links' %>
+    <%= link_to 'New Room', new_room_path, data: {turbolinks: false}, class: 'btn btn-primary pull-right links' %>
 <% end %>
 <section id="widget-grid" class="users_list">
   <div class="row">

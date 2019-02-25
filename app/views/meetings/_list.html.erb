@@ -155,12 +155,12 @@
                                 " '></i>");
                         }
                         element.bind('click', function() {
-                            $.getScript('/rooms/<%= @room.id %>/meetings/'+event.id+'/edit.js')
+                            $.getScript('/rooms/<%= @room.id %>/meetings/'+event.id+'/edit.js');
                         });
                     },
                     dayRender: function(date, element, view){
                         element.bind('click', function() {
-                            d = date._d
+                            d = date._d;
                             ds = d.getFullYear()+ '-' + (d.getMonth() + 1) + '-'+ d.getDate()
                             $('#meeting_date').val(ds)
                           $('#NewMeeting').modal()
@@ -178,6 +178,7 @@
                 var slotDate;
 
                 function dayClickCallback(date){
+                    reset();
                     d = date._d;
                     tzDifference = d.getTimezoneOffset()
                     d = new Date(d.getTime() + tzDifference * 60 * 1000);
@@ -185,17 +186,18 @@
                     ds = d.getFullYear()+ '-' + (d.getMonth() + 1) + '-'+ d.getDate()
                     $('#meeting_date').val(ds)
                     time_start = tConvert(d.toTimeString().substr(0, 5))
-                    time_end = tConvert((d.addHours(1)).toTimeString().substr(0, 5) )
+                    time_end = tConvert((d.addHours(1)).toTimeString().substr(0, 5) );
+                    $.getScript('/rooms/<%= @room.id %>/meetings/new.js?time_start=' + time_start + '&time_end=' + time_end+ '&date=' + ds);
                     console.log(time_start)
-                    $('#meeting_time_start').select2('destroy')
-
-                    $('#meeting_time_start').val(time_start.replace(' ', ''))
-                    $('#meeting_time_start').select2({})
-                    $('#meeting_time_end').select2('destroy')
-                    $('#meeting_time_end').val(time_end.replace(' ', ''))
-
-                    $('#meeting_time_end').select2({})
-                    $('#NewMeeting').modal();
+//                    $('#meeting_time_start').select2('destroy')
+//
+//                    $('#meeting_time_start').val(time_start.replace(' ', ''))
+//                    $('#meeting_time_start').select2({})
+//                    $('#meeting_time_end').select2('destroy')
+//                    $('#meeting_time_end').val(time_end.replace(' ', ''))
+//
+//                    $('#meeting_time_end').select2({})
+//                    $('#NewMeeting').modal();
                 }
 
                 function eventRenderCallback(event,element){
@@ -256,7 +258,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">New Meeting</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="new_meeting_body">
 
       <%= render partial: 'meetings/form',
                  locals: {
@@ -286,3 +288,11 @@
 
 
 
+<style>
+  .fc-time:before, .fc-time:after {
+    display: none;
+  }
+    .fc-time span{
+      display: inline-block !important; ;
+    }
+</style>

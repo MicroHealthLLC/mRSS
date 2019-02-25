@@ -7,10 +7,9 @@
       <% meetings.each do |meeting| %>
           <tr>
             <td><%= meeting.name %></td>
-            <td><%= meeting.time_start.strftime('%I:%M %p') %></td>
-            <td><%= meeting.time_end.strftime('%I:%M %p') %></td>
+            <td><%= meeting.time_start.strftime('%-I:%M %p') %></td>
+            <td><%= meeting.time_end.strftime('%-I:%M %p') %></td>
           </tr>
-
       <% end %>
   <% end %>
 </table>

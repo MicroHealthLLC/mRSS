@@ -3,7 +3,7 @@
   <tr>
     <th>Name</th>
     <% if current_user %>
-    <th colspan="2">Actions</th>
+    <th colspan="2" style="text-align: center;">Actions</th>
     <% end %>
   </tr>
   </thead>
@@ -12,8 +12,8 @@
       <tr data-open-url="<%= room_path(room) %>">
         <td class="room_uppercase"><%= room.name %></td>
         <% if current_user %>
-            <td><%= link_to '<i class="fa fa-edit"></i> Edit Room'.html_safe, edit_room_path(room), class: 'btn btn-primary pull-right links' %></td>
-            <td><%= link_to '<i class="fa fa-trash"></i> Delete Room'.html_safe, room_path(room), data: {confirm: 'Are you sure to delete this room (all meetings will be deleted) ?', method: :delete }, class: 'btn btn-primary pull-right links' %></td>
+            <td><%= link_to '<i class="fa fa-edit"></i> Edit Room'.html_safe, edit_room_path(room), data: {turbolinks: false}, class: 'btn btn-primary pull-right links' %></td>
+            <td><%= link_to '<i class="fa fa-trash"></i> Delete Room'.html_safe, room_path(room), data: {turbolinks: false, confirm: 'Are you sure to delete this room (all meetings will be deleted) ?', method: :delete }, class: 'btn btn-primary pull-right links' %></td>
         <% end %>
       </tr>
   <% end %>

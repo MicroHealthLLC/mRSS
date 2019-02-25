@@ -29,10 +29,6 @@
             <%= f.label 'Date', class: 'col-md-3 control-label' %>
             <div class="col-md-9">
               <div class="mdp"></div>
-              <% if meeting.new_record?
-                   meeting.meeting_dates.build(date: Date.today)
-                 end %>
-
               <%= text_field_tag :date, meeting.meeting_dates.map(&:date).map(&:to_date), class: 'date form-control', style: "position:relative; display: none" %>
             </div>
           </div>
@@ -63,7 +59,7 @@
           <%if meeting.persisted?%>
               <%= link_to 'Delete', room_meeting_path(@room, meeting), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger pull-right' %>
           <%end %>
-          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal', onclick: "reset(); $('.modal').modal('hide');" %>
+          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal', onclick: "$('.modal').modal('hide');" %>
           <%= f.submit 'Save', class: 'btn btn-success pull-right' %>
         </div>
       </div>
