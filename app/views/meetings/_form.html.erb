@@ -2,7 +2,7 @@
   <legend></legend>
   <%= form_for([@room, meeting], remote: true, html: { class: 'form-horizontal'}) do |f| %>
 
-      <div id="error_explanation">
+      <div class='error' id="<%= meeting.new_record? ? 'error_explanation' : 'error_explanation_edit' %>">
 
       </div>
 

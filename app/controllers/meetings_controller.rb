@@ -15,7 +15,8 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/new
   def new
-    @meeting = Meeting.new room_id: @room.id, date: Date.today
+    @meeting = Meeting.new room_id: @room.id, time_end: params[:time_end], time_start: params[:time_start]
+    @meeting.meeting_dates.build(date: params[:date])
   end
 
   # GET /meetings/1/edit
