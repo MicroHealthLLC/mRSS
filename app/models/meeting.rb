@@ -1,6 +1,7 @@
 class Meeting < ApplicationRecord
   belongs_to :room, optional: true
   has_many :meeting_dates, dependent: :destroy
+  accepts_nested_attributes_for :meeting_dates,:allow_destroy => true
   validates_presence_of :room_id, :time_start, :time_end, :name
   # validates_uniqueness_of :name, scope: [:room_id, :date]
 
@@ -22,6 +23,4 @@ class Meeting < ApplicationRecord
           end_date: date.end_of_month
     )
   end
-
-
 end

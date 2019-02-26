@@ -59,7 +59,7 @@
           <%if meeting.persisted?%>
               <%= link_to 'Delete', room_meeting_path(@room, meeting), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger pull-right' %>
           <%end %>
-          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal', onclick: "$('.modal').modal('hide');" %>
+          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal' %>
           <%= f.submit 'Save', class: 'btn btn-success pull-right' %>
         </div>
       </div>
@@ -70,6 +70,11 @@
     function reset(){
         $('#error_explanation').html('');
     }
+    $('.cancel_meeting_modal').off();
+    $('.cancel_meeting_modal').on('click', function(e){
+        e.preventDefault();
+        $('.modal').modal('hide');
+    });
 
     $('.mdp').multiDatesPicker({
         dateFormat: "yy-mm-dd",

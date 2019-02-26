@@ -27,9 +27,7 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = Meeting.new(meeting_params)
-    params[:date].to_s.split(',').each do |md|
-      @meeting.meeting_dates.build(date: md)
-    end
+    build_dates_attributes
     respond_to do |format|
       if @meeting.save
         format.js { render js: 'window.location.reload()' }
@@ -46,12 +44,7 @@ class MeetingsController < ApplicationController
   # PATCH/PUT /meetings/1.json
   def update
     @meeting.attributes = meeting_params
-    @meeting.meeting_dates.delete_all
-    dates = params[:date].to_s.split(',')
-    @meeting.meeting_dates.where.not(date: dates).delete_all
-    dates.each do |md|
-      @meeting.meeting_dates.where(date: md).first_or_initialize
-    end
+    build_dates_attributes
     respond_to do |format|
       if @meeting.valid? and @meeting.save
         format.html { redirect_to @room, notice: 'Meeting was successfully updated.' }
@@ -88,5 +81,33 @@ class MeetingsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def meeting_params
     params.require(:meeting).permit(:name, :description, :room_id, :date, :time_start, :time_end)
+  end
+
+  def build_dates_attributes
+    date_params = []
+
+    dates = params[:date].to_s.split(',')
+    dates.each do |date|
+      if @meeting.persisted? && (ppr = @meeting.meeting_dates.where(date: date).first)
+        date_params << {
+            id: ppr.id,
+            meeting_id: @meeting.id,
+            date: date }
+      else
+        date_params << {
+            meeting_id: @meeting.id,
+            date: date }
+      end
+    end
+    if @meeting.persisted?
+      @meeting.meeting_dates.where.not(date: dates).each do |md|
+        date_params << {
+            id: md.id,
+            meeting_id: @meeting.id,
+            date: md.date,
+            _destroy: true }
+      end
+    end
+    @meeting.meeting_dates_attributes = date_params
   end
 end
