@@ -1,4 +1,5 @@
-##  This is a really simple calendaring system...works well on chrome based browsers.  Intended to be run on a tablet, we run it on ipads and have them installed next to conference rooms.  Users can book the conference room at the room or online.  There is an admin screen to setup the room and brand the system.  We wanted something really simple...as easy as it gets for users allowing them to book daily, weekly, biweekly, monthly etc etc without connecting it to other systems.  That brings a bit of complexity to users who have to authenticate to book a room.  Users just didn't do that so we simplified it as much as possible.
+# mRSS  
+This is a really simple calendaring system...works well on chrome based browsers.  Intended to be run on a tablet, we run it on ipads and have them installed next to conference rooms.  Users can book the conference room at the room or online.  There is an admin screen to setup the room and brand the system.  We wanted something really simple...as easy as it gets for users allowing them to book daily, weekly, biweekly, monthly etc etc without connecting it to other systems.  That brings a bit of complexity to users who have to authenticate to book a room.  Users just didn't do that so we simplified it as much as possible.
 
 ![Calendar](calendar.png)
 
