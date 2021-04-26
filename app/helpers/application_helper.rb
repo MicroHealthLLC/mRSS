@@ -12,6 +12,7 @@ module ApplicationHelper
   end
 
   def can_connect_with?(type)
+    return true
     Setting["#{type}_KEY".upcase].present?
   end
 

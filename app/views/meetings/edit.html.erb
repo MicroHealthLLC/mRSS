@@ -1,13 +1,19 @@
+
+
+
 <section id="widget-grid" class="users_list">
-  <div class="row">
-    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <%= render partial: 'form',
+      <div class="card mt-2" id="new-meeting-card">
+         <h2 class="mt-3 mb-3">Edit Meeting</h2>
+          <%= render 'meetings/form', meeting: @meeting %>
+      </div>
+
+    <!-- <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%#= render partial: 'form',
                  layout: 'shared/smart_widget_wrapper',
                  locals: {
                      meeting: @meeting,
                      wid_id: 'meeting',
-                     wid_title: 'Edit Meeting'
+                     wid_title: 'New Meeting'
                  } %>
-    </article>
-  </div>
+    </article> -->
 </section>

@@ -1,44 +1,154 @@
-<div class="module-title">
-  <h2 class='module-title-text'>EDIT USER</h2>
+<%
+=begin%>
+ <nav class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#" onclick="return false;" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            <a href="#" onclick="return false;" class="bars" style=""></a>
+
+            <a class="navbar-brand" href="/">
+                <img width="38" alt="Brand" src="/assets/microhealth-logo-0c1f3ac82ce5b4f0c596116b8d59789234de1707b104c40814962e6f74181a52.png">
+              <span class="logo-name">
+                aa
+              </span>
+              </a>        
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="pull-left">
+                <li>
+                    <a href="#" onclick="return false;" class="sidemenu-collapse">
+                        <i class="material-icons">reorder</i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Full Screen Button -->
+                <li class="fullscreen">
+                    <a href="javascript:;" class="fullscreen-btn">
+                        <i class="fas fa-expand"></i>
+                    </a>
+                </li>
+                <!-- #END# Full Screen Button -->
+
+                <li class="dropdown user_profile mr-4">
+                   <a href="#" onclick="return false;" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                      <img width="32" height="32" alt="User" src="/assets/img_avatar-cd1b399a6bb93a264f35a2a268f3cb80a30ea2e4af5a5738f9251004188990d9.png">
+                   </a>
+                    <ul class="dropdown-menu pullDown">
+                        <li class="body">
+                            <ul class="user_dw_menu">
+                                <li>
+                                  <a href="/users/edit">
+                                    <i class="material-icons">person</i>Profile
+</a>                                </li>
+                                <li>
+                                  <a title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser" href="/users/sign_out">
+                                    <i class="material-icons">power_settings_new</i>Logout
+</a>                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<aside id="leftsidebar" class="sidebar">
+    <!-- Menu -->
+    <div class="menu">
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 521.469px;"><ul class="list" style="overflow: hidden; width: auto; height: 521.469px;">
+            <li class="sidebar-user-panel active" style="display: block;">
+                <div class="user-panel">
+                    <div class=" image">
+                      <img class="img-circle user-img-circle" alt="Edit Entry" src="/assets/img_avatar-cd1b399a6bb93a264f35a2a268f3cb80a30ea2e4af5a5738f9251004188990d9.png">
+                    </div>
+                </div>
+                <div class="profile-usertitle">
+                    <div class="sidebar-userpic-name"> Emily Smith </div>
+                    <div class="profile-usertitle-job ">Manager </div>
+                </div>
+            </li>
+              <li>
+                <a href="/rooms/1" class=" waves-effect waves-block">
+                  <i class="fa fa-lg fa-fw fa-fa-fw fa-glass"></i>
+                  <span>some room</span>
+                </a>
+              </li>
+              <li>
+                <a href="/rooms/2" class=" waves-effect waves-block">
+                  <i class="fa fa-lg fa-fw fa-fa-fw fa-square"></i>
+                  <span>New Room</span>
+                </a>
+              </li>
+
+              <li>
+                  <a href="#" onclick="return false;" class="menu-toggle waves-effect waves-block">
+                      <i class="fa fa-lg fa-fw fa-gears"></i>
+                      <span>Administration</span>
+                  </a>
+                  <ul class="ml-menu">
+                      <!-- <li>
+                      </li> -->
+                      <li>
+                        <a href="/rooms" class=" waves-effect waves-block">Rooms</a>
+                      </li>
+                      <li>
+                        <a href="/settings" class=" waves-effect waves-block">Settings</a>
+                      </li>
+                  </ul>
+              </li>
+        </ul><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.5); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 521.938px;"></div><div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+    </div>
+    <!-- #Menu -->
+</aside> 
+<%
+=end%>
+
+<div role="tabpanel" class="tab-pane" id="usersettings" aria-expanded="false">
+            <div class="card">
+                    <div class="header">
+                        <h2>
+                          <strong>EDIT USER</strong></h2>
+                    </div>
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                  <%= devise_error_messages! %>
+                    <div class="body">
+                        <div class="form-group">
+                            <%= f.text_field :login  %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :email %><br />
+                            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                        </div>
+                        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                        <% end %>
+
+                        <div class="form-group">
+                            <%= f.label :New_password %> <i>(leave blank if you don't want to change it)</i><br />
+                            <%= f.password_field :password, autocomplete: "new-password" %>
+                            <% if @minimum_password_length %>
+                                <br />
+                                <em><%= @minimum_password_length %> characters minimum</em>
+                            <% end %>
+                        </div>
+                        
+                        <div class="form-group">
+                           <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                           <%= f.password_field :current_password, autocomplete: "current-password" %>
+                        </div>
+
+                        <div>
+                          <button class="btn btn-info btn-round float-right mb-3"><% f.submit%>Update</button>
+                           <%= link_to root_path , class: 'btn btn-xs btn-warning modal-trigger mr-3 float-right' do %>
+                            Cancel
+                          <% end %>
+                        </div>  
+                    </div>
+                <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
-
-    <div class="field">
-      <%= f.label :login %><br />
-      <%= f.text_field :login %>
-    </div>
-
-       <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
-      <% if @minimum_password_length %>
-          <br />
-          <em><%= @minimum_password_length %> characters minimum</em>
-      <% end %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "current-password" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Update" %>
-    </div>
-<% end %>

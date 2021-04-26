@@ -1,15 +1,19 @@
-<% if current_user %>
-    <%= link_to 'New Room', new_room_path, data: {turbolinks: false}, class: 'btn btn-primary pull-right links' %>
-<% end %>
-<section id="widget-grid" class="users_list">
-  <div class="row">
-    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <%= render partial: 'list',
+<div class="pull-right ">
+   <% if current_user %>
+     <%= link_to 'New Room'.html_safe, new_room_path, class: 'btn btn-outline-primary btn-link'  %>
+   <% end %>
+</div>
+<div class="mt-5">
+  <section id="widget-grid" class="users_list">
+    <div class="row">
+       <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         <%= render partial: 'list',
                  layout: 'shared/smart_widget_wrapper',
                  locals: {
-                     wid_id: 'rooms',
-                     wid_title: 'Rooms'
+                 wid_id: 'rooms',
+                 wid_title: ''
                  } %>
-    </article>
-  </div>
-</section>
+       </article>
+    </div>
+  </section>
+</div>

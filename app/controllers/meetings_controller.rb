@@ -1,16 +1,20 @@
 class MeetingsController < ApplicationController
-  before_action :set_room
+  before_action :set_room, except: [:get_meetings]
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :verify_authenticity_token, only: [:new, :create]
   # GET /meetings
   # GET /meetings.json
   def index
-    @meetings = Meeting.all
+    @meetings = @room.meetings
   end
 
   # GET /meetings/1
   # GET /meetings/1.json
   def show
+  end
+
+  def get_meetings
+    @meetings = Meeting.all
   end
 
   # GET /meetings/new
@@ -33,9 +37,9 @@ class MeetingsController < ApplicationController
         format.js { render js: 'window.location.reload()' }
         format.json { render :show, status: :created, location: @meeting }
       else
-        format.js {
-        }
+        format.js {  }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -86,7 +90,7 @@ class MeetingsController < ApplicationController
   def build_dates_attributes
     date_params = []
 
-    dates = params[:date].to_s.split(',')
+    dates = params[:date].to_s.split(',').map(&:strip)
     dates.each do |date|
       if @meeting.persisted? && (ppr = @meeting.meeting_dates.where(date: date).first)
         date_params << {

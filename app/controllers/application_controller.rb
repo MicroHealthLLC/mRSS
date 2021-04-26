@@ -1,20 +1,19 @@
-# :nodoc:
 class ApplicationController < ActionController::Base
-  # before_filter :set_gettext_locale
-  # before_action :authenticate_user!
+  layout :set_layout
   protect_from_forgery with: :exception
-  #
-  # around_action :user_time_zone
-  #
-  # def user_time_zone(&block)
-  #   Time.use_zone(User.current.time_zone, &block)
-  # end
+
   def set_user
     if user_signed_in?
-        User.current = current_user
+      User.current = current_user
     end
   rescue ActiveRecord::RecordNotFound
     render_404
   end
 
+  def set_layout
+    if is_a?(Devise::SessionsController) || is_a?(Devise::RegistrationsController) || is_a?(Devise::ConfirmationsController) || is_a?(Devise::UnlocksController) || is_a?(Devise::PasswordsController)
+      return "authentication"
+    end
+    "application"
+  end
 end

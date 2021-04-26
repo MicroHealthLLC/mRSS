@@ -1,44 +1,50 @@
-<aside id="left-panel">
 
-  <!-- end user info -->
-
-  <!-- NAVIGATION : This navigation is also responsive-->
-  <nav>
-    <!--
-    NOTE: Notice the gaps after each icon usage <i></i>..
-    Please note that these links work a bit different than
-    traditional href="" links. See documentation for details.
-    -->
-
-    <ul>
-      <% Room.all.each do |room| %>
-          <li>
-            <a href="<%= room_path(room) %>" id="ul_admin"><i class="fa fa-lg fa-fw fa-fa-fw <%= room.icon || 'fa-square' %>"></i> <span class="menu-item-parent room_uppercase"><%= room.name %></span></a>
-          </li>
-      <% end %>
-      <% if current_user %>
-          <li>
-            <a href="#" id="ul_admin"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">Administration</span></a>
-            <ul id="admin_menu">
+<!-- Left Sidebar -->
+<aside id="leftsidebar" class="sidebar">
+    <!-- Menu -->
+    <div class="menu">
+        <ul class="list">
+            <!-- <li class="sidebar-user-panel active">
+                <div class="user-panel">
+                    <div class=" image">
+                      <%= image_tag("img_avatar.png", class: 'img-circle user-img-circle', alt: "Edit Entry") %>
+                    </div>
+                </div>
+                <div class="profile-usertitle">
+                    <div class="sidebar-userpic-name"> Emily Smith </div>
+                    <div class="profile-usertitle-job ">Manager </div>
+                </div>
+            </li> -->
+            <% Room.all.each do |room| %>
               <li>
-                <%#= link_to "Users", users_path %>
+                <a href="<%= room_path(room) %>">
+                  <i class="fa fa-lg fa-fw fa-fa-fw <%= room.icon || 'fa-square' %>"></i>
+                  <span><%= room.name %></span>
+                </a>
               </li>
+            <% end %>
+
+            <% if current_user.present? %>
               <li>
-                <%= link_to "Rooms", rooms_path %>
+                  <a href="#" onClick="return false;" class="menu-toggle">
+                      <i class="fa fa-lg fa-fw fa-gears"></i>
+                      <span>Administration</span>
+                  </a>
+                  <ul class="ml-menu">
+                      <!-- <li>
+                        <%#= link_to "Users", users_path %>
+                      </li> -->
+                      <li>
+                        <%= link_to "Rooms", rooms_path %>
+                      </li>
+                      <li>
+                        <%= link_to "Settings", settings_path %>
+                      </li>
+                  </ul>
               </li>
-              <li>
-                <%= link_to "Settings", settings_path %>
-              </li>
-            </ul>
-          </li>
-      <% end %>
-    </ul>
-
-  </nav>
-
-
-  <span class="minifyme" data-action="minifyMenu">
-				<i class="fa fa-arrow-circle-left hit"></i>
-			</span>
-
+            <% end %>
+        </ul>
+    </div>
+    <!-- #Menu -->
 </aside>
+<!-- #END# Left Sidebar -->

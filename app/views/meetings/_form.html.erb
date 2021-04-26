@@ -1,93 +1,83 @@
-<fieldset>
-  <legend></legend>
-  <%= form_for([@room, meeting], remote: true, html: { class: 'form-horizontal'}) do |f| %>
+<div class="mt-3">
+  <%= form_for [@room, meeting], remote: true, authenticity_token: true, html: {class: 'form-horizontal'} do |f| %>
+    <div class='error' id="<%= meeting.new_record? ? 'error_explanation' : 'error_explanation_edit' %>"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group" >
+          <%= f.label 'Title', class: 'mb-0 col-md-3 control-label pl-0' %>
+           <%= f.hidden_field :room_id %>
+            <%= f.text_field :name , class: 'form-control' %>
 
-      <div class='error' id="<%= meeting.new_record? ? 'error_explanation' : 'error_explanation_edit' %>">
-
-      </div>
-
-      <div class="row">
-        <div class="col-xs-7">
-          <div class="form-group">
-            <%= f.label 'Title', class: 'col-md-3 control-label' %>
-            <div class="col-md-9">
-              <%= f.hidden_field :room_id  %>
-              <%= f.text_field :name , class: 'form-control' %>
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <%= f.label 'Description' , class: 'col-md-3 control-label' %>
-            <div class="col-md-9">
-              <%= f.text_area :description , class: 'form-control ck-editor' %>
-            </div>
-          </div>
         </div>
-        <div class="col-xs-4">
-          <div class="form-group" >
-            <%= f.label 'Date', class: 'col-md-3 control-label' %>
-            <div class="col-md-9">
-              <div class="mdp"></div>
-              <%= text_field_tag :date, meeting.meeting_dates.map(&:date).map(&:to_date), class: 'date form-control', style: "position:relative; display: none" %>
-            </div>
-          </div>
-
-          <% times =  (6..11).map{|hour| ["#{hour}:00AM", "#{hour}:15AM", "#{hour}:30AM", "#{hour}:45AM"] } %>
-          <% times += (12..12).map{|hour| ["#{hour}:00PM", "#{hour}:15PM", "#{hour}:30PM", "#{hour}:45PM"] } %>
-          <% times += (13..23).map{|h| hour = h -12
-          ["#{hour}:00PM", "#{hour}:15PM", "#{hour}:30PM", "#{hour}:45PM"] } %>
-          <% times.flatten! %>
-          <div class="form-group">
-            <%= f.label 'Time start', class: 'col-md-3 control-label' %>
-            <div class="col-md-9">
-              <%= f.select 'time_start', options_for_select(times, selected: (meeting.time_start || Time.now).strftime('%I:%M%p').gsub(/^0/, '')) %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label 'Time end' , class: 'col-md-3 control-label' %>
-            <div class="col-md-9">
-              <%= f.select :time_end, options_for_select(times, selected: (meeting.time_end || Time.now).strftime('%I:%M%p').gsub(/^0/, '')) %>
-            </div>
-          </div>
+        <div class="form-group" >
+          <%= f.label 'Description' , class: 'col-md-3 control-label mt-4 pl-0' %>
+            <%= f.text_area :description , class: 'form-control ck-editor mt-3 ' ,id: "description_rooms_new" %>
         </div>
       </div>
 
+      <div class="col-md-12">
+        <div class="form-group" >
+            <%= f.label 'Date', class: 'mb-0 col-md-3 control-label mt-2 pl-0' %>
+            <%= date_field_tag :date, '', data: {selected: meeting.meeting_dates.pluck(:date).map(&:to_s)} %>
+        </div>
+
+        <% times =  (6..11).map{|hour| ["#{hour}:00AM", "#{hour}:15AM", "#{hour}:30AM", "#{hour}:45AM"] } %>
+        <% times += (12..12).map{|hour| ["#{hour}:00PM", "#{hour}:15PM", "#{hour}:30PM", "#{hour}:45PM"] } %>
+        <% times += (13..23).map{|h| hour = h -12
+        ["#{hour}:00PM", "#{hour}:15PM", "#{hour}:30PM", "#{hour}:45PM"] } %>
+        <% times.flatten! %>
+
+        <div class="form-group mt-3" >
+          <%= f.label 'Time start', class: 'mb-0 col-md-4 control-label pl-0'%>
+            <%= f.select :time_start, options_for_select(times, selected: (meeting.time_start || Time.now).strftime('%I:%M%p').gsub(/^0/, '')), class: 'default'  %>
+        </div>
+
+        <div class="form-group mt-3" >
+          <%= f.label 'Time end' , class: 'col-md-4 control-label pl-0' %>
+          <div class="mt-3">
+            <%= f.select :time_end, options_for_select(times, selected: (meeting.time_end || Time.now).strftime('%I:%M%p').gsub(/^0/, '')) %>
+          </div>
+        </div>
+      </div>
       <div class="form-group" >
-        <div class="col-md-12">
-          <%if meeting.persisted?%>
-              <%= link_to 'Delete', room_meeting_path(@room, meeting), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger pull-right' %>
+          <% if meeting.persisted?%>
+            <%= link_to 'Delete', room_meeting_path(@room, meeting), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-lg btn-danger pull-right ml-1 mt-5 mr-4' %>
           <%end %>
-          <%= link_to 'Cancel', '#', class: 'btn btn-warning pull-right cancel_meeting_modal' %>
-          <%= f.submit 'Save', class: 'btn btn-success pull-right' %>
-        </div>
+
+          <%= link_to 'Cancel', room_path(@room), class: 'btn btn-warning pull-right cancel_meeting_modal mt-5 mr-3 mb-3' %>
+          <%= f.submit '  Save  ', class: 'btn btn-lg btn-success pull-right mr-3 mt-5 mb-3' %>
       </div>
+    </div>
   <% end %>
-</fieldset>
+</div>
 
 <script>
-    function reset(){
-        $('#error_explanation').html('');
+  function reset(){
+    $('#error_explanation').html('');
     }
-    $('.cancel_meeting_modal').off();
     $('.cancel_meeting_modal').on('click', function(e){
-        e.preventDefault();
-        $('.modal').modal('hide');
+      // e.preventDefault();
+      // $('.modal').modal('hide');
+  });
+  function init() {
+    let dates = $('#date').data('selected');
+    $('#date').flatpickr({
+      mode: "multiple",
+      dateFormat: "Y-m-d",
+      defaultDate: dates
     });
+    $('select').formSelect();
+  }
+  $(document).on('turbolinks:load', function() {
+    init();
+  });
 
-    $('.mdp').multiDatesPicker({
-        dateFormat: "yy-mm-dd",
-        altField: '.date',
-        addDates: <%= raw meeting.meeting_dates.map(&:date).map(&:to_date).map(&:to_s) %>,
-        minDate: 0,
-        "prevText":'<i class="fa fa-chevron-left"></i>',
-        "nextText":'<i class="fa fa-chevron-right"></i>'
-    })
+  $(document).on('show.bs.modal', function() {
+    init();
+  });
 </script>
 <style>
-  div.fc-event-container .fc-time-grid-event
-  {
+  div.fc-event-container .fc-time-grid-event {
     min-height: 20px;
   }
 </style>

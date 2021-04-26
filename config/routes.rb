@@ -45,9 +45,10 @@ Rails.application.routes.draw do
 
   # Misc methods
   get '/home/set_locale', to: 'home#set_locale', as: :home_set_locale
-
-  # CK editor
-
+  get '/meetings', to: 'meetings#get_meetings'
+  #profile
+  get '/profile/edit', to: 'profiles#edit'
+  post '/profile', to: 'profiles#update'
 
   resources :settings, only: [:index, :create] do
     collection do

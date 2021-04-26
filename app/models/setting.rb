@@ -1,26 +1,25 @@
 class Setting < ApplicationRecord
   mount_uploader :logo, AvatarUploader
   DATE_FORMATS = [
-      '%Y-%m-%d',
-      '%d/%m/%Y',
-      '%d.%m.%Y',
-      '%d-%m-%Y',
-      '%m/%d/%Y',
-      '%d %b %Y',
-      '%d %B %Y',
-      '%b %d, %Y',
-      '%B %d, %Y'
+    '%Y-%m-%d',
+    '%d/%m/%Y',
+    '%d.%m.%Y',
+    '%d-%m-%Y',
+    '%m/%d/%Y',
+    '%d %b %Y',
+    '%d %B %Y',
+    '%b %d, %Y',
+    '%B %d, %Y'
   ]
 
   TIME_FORMATS = [
-      '%H:%M',
-      '%I:%M %p'
+    '%H:%M',
+    '%I:%M %p'
   ]
 
   cattr_accessor :available_settings, :cached_settings
   self.available_settings ||= {}
   self.cached_settings ||= {}
-  # cached_cleared_on = Time.now
 
   def self.theme(use_admin=true)
     admin
@@ -34,10 +33,9 @@ class Setting < ApplicationRecord
     false
   end
 
-
   def self.get_theme
     return @theme if @theme
-    @theme ||=  admin_theme
+    @theme ||= admin_theme
     @theme
   end
 
@@ -88,12 +86,5 @@ class Setting < ApplicationRecord
     end
   end
   load_available_settings
-
-  # Defines getter and setter for each setting
-  # Then setting values can be read using: Setting.some_setting_name
-  # or set using Setting.some_setting_name = "some value"
-  # def self.define_setting(name, options={})
-  #
-  # end
 
 end

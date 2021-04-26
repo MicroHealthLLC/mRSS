@@ -74,5 +74,6 @@ gem 'ajax-datatables-rails'
 
 gem 'carrierwave'
 gem "mini_magick"
+gem 'flatpickr'
 
 

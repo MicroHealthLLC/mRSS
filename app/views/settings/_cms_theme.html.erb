@@ -1,7 +1,7 @@
 <%= form_tag(set_theme_settings_path, method: 'post',  class: 'form-horizontal' ) do |f| %>
-    <div id="tabs-theme">
+  <div id="tabs-theme">
 
-      <legend class="no-padding margin-bottom-10">Layout Options</legend>
+    <legend class="no-padding margin-bottom-10">Layout Options</legend>
       <section>
         <label><input type="checkbox" name="header" id="smart-fixed-header" <%= @admin_theme_setting["header"].present? ? 'checked' : ''%> class="checkbox style-0"><span>Fixed Header</span></label>
         <label><input type="checkbox" name="footer" id="smart-fixed-footer" <%= @admin_theme_setting["footer"].present? ? 'checked' : ''%> class="checkbox style-0"><span>Fixed Footer</span></label>
@@ -9,9 +9,12 @@
         <label><input type="checkbox" name="topmenu" id="smart-topmenu" <%= @admin_theme_setting["topmenu"].present? ? 'checked' : ''%> class="checkbox style-0"><span>Menu on <b>top</b></span></label>
         <span id="smart-bgimages"></span>
       </section>
+  
       <section>
       </section>
+  
       <h6 class="margin-top-10 semi-bold margin-bottom-5">CMS Skins</h6>
+  
       <section id="smart-styles">
         <span  data-target='#theme_style' data-style="smart-style-0" id="smart-style-0" data-skinlogo="img/logo.png" class="cms_styles btn btn-block btn-xs txt-color-white margin-right-5" style="background-color:#4E463F;"> <i class="fa fa-check fa-fw"></i>Smart Default</span>
         <span   data-target='#theme_style' data-style="smart-style-1"  id="smart-style-1" data-skinlogo="img/logo-white.png" class=" cms_styles btn btn-block btn-xs txt-color-white" style="background:#3A4558;"><i class="fa fa-check fa-fw"></i>Dark Elegance</span>
@@ -32,7 +35,7 @@
           </div>
         </div>
       </section>
-    </div>
+  </div>
 
     <script>
         $( function() {

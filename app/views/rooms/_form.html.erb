@@ -1,34 +1,33 @@
-<fieldset>
+<fieldset id="fieldset-new">
   <legend></legend>
-  <%= form_for( room, html: { class: 'form-horizontal ' }) do |f| %>
+  <div class="card" id="card-room">
+    <%= form_for( room, html: { class: 'form-horizontal mt-5 ' }) do |f| %>
       <% if room.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
-
+        <div id="error_explanation">
+          <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
             <ul>
               <% room.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
               <% end %>
             </ul>
-          </div>
+        </div>
       <% end %>
 
       <div class="form-group">
-        <%= f.label 'Name', class: 'col-md-2 control-label' %>
-        <div class="col-md-9">
-          <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %>
-        </div>
+        <h2> <%= f.label 'Room Name', class: 'col-md-2 control-label' %> </h2>
+          <div class="col-md-12">
+            <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %>
+          </div>
       </div>
 
+      <div class="form-group default-select">
+         <div class="col-md-2 control-label">
+           <i class="" id="icon_result"></i>
+            <%= f.label 'Room Icon', class: 'mt-3' %>
+         </div>
 
-      <div class="form-group">
-        <div class="col-md-2 control-label">
-          <i class="" id="icon_result"></i>
-          <%= f.label 'Icon', class: '' %>
-        </div>
-
-        <div class="col-md-8">
-          <%= f.select :icon, options_for_select(Room::ICONS, selected: f.object.icon), class: 'form-control'%>
+        <div class="col-md-12 mt-3 mb-3 " id="select-tag">
+          <%= select_tag :icon, options_for_select(Room::ICONS, f.object.icon), class: 'form-control select2' %>
 
           <script>
               $(function(){
@@ -41,16 +40,17 @@
         </div>
       </div>
 
-
-
       <div class="form-group" >
-        <div class="col-md-11">
+        <div class="col-md-12">
           <%if room.persisted?%>
-          <%= link_to 'Delete', room_path, method: :delete, data: {confirm: 'Are you sure to delete this room?'}, class: 'btn btn-danger pull-right' %>
+           <%= link_to 'Delete', room_path, method: :delete, data: {confirm: 'Are you sure to delete this room?'}, class: 'btn btn-danger pull-right  mt-5'  %>
           <% end %>
-          <%= link_to 'Cancel', rooms_path, class: 'btn btn-warning pull-right' %>
-          <%= f.submit 'Save', class: 'btn btn-success pull-right' %>
+            <%= f.submit 'Save', class: 'btn btn-success pull-right mr-3  mt-5' %>
+            <%= link_to 'Cancel', rooms_path, class: 'btn btn-warning pull-right mr-3 mt-5' %>
         </div>
       </div>
+    </div>
   <% end %>
+  </div>
 </fieldset>
+

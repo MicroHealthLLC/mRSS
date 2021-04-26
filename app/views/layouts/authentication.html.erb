@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr" class="<%= Setting.theme_style %>" id="<%= yield :html_id %>">
+<head>
+  <meta charset="utf-8">
+
+  <title>Room Meeting</title>
+  <%= csrf_meta_tags %>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <%= stylesheet_link_tag 'application', media: 'screen' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track'=> 'reload' %>
+  <!-- FAVICONS -->
+  <%= favicon_link_tag '/favicon.ico' %>
+  <%= favicon_link_tag '/favicon.ico', rel: 'icon' %>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+
+<body class="light">
+  <%= yield %>
+</body>
+
+</html>

@@ -4,8 +4,6 @@ class HomeController < ApplicationController
     redirect_to :back
   end
 
-
   def index
-
   end
 end

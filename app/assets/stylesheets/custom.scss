@@ -1,0 +1,80 @@
+
+a.btn {
+  padding-top: 8px;
+}
+.bg-github {
+  background-color: #181616;
+}
+form.form-horizontal{
+  height: 330px;
+}
+#home_page_content{
+  height: 100px;
+}
+#description_rooms_new{
+  height: 100px;
+}
+.fc-toolbar .fc-center {
+  float: right;
+}
+.fc-toolbar .fc-left {
+  display: inline-block;
+  float: none;
+}
+.fc-toolbar .fc-right {
+  float: left;
+}
+#meeting_container{
+  padding-left: 0px !important;
+}
+#rooms_container{
+  padding-left: 0px !important;
+}
+.select2 {
+  .select2-selection__rendered {
+    border-bottom: 1px solid #9e9e9e;
+    background-color: #FFFFFF;
+  }
+}
+.no-sorting:before, .no-sorting:after{
+  display: none !important;
+}
+.select2{
+  width: 100% !important;
+}
+.room_button{
+  margin-right: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 2%;
+}
+#card-edit-meetings {
+  min-height: 680px;
+  width: 100%;
+}
+#fieldset-new{
+  padding: 1 !important;
+  padding-top: 0px;
+  padding-right: 5px !important;
+  padding-bottom: 0px;
+  padding-left: 7px !important;
+}
+#card-room{
+  height: 300px;
+}
+#new-meeting-card{
+  padding-inline:25px;
+  width: 100%;
+  height: 600px;
+  paddding: 0px 0px !important;
+}
+.modal .modal-content .modal-body {
+  color: #777;
+  padding: 0px !important;
+}
+#modal-header-title{
+  padding-inline: 0;
+}
+.room_uppercase{
+  padding-inline: 14px;
+}
