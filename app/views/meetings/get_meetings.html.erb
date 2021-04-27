@@ -14,25 +14,25 @@
                               <tr>
                                   <tr>
                                     <th>Name</th>
-                                    <th>Description</th>
+                                    <th colspan="1" style="width:80px;">Description</th>
                                     <th>Room</th>
                                     <th>Date</th>
                                     <th>Time start</th>
                                     <th>Time end</th>
-                                    <th class="no-sorting text-right">Actions</th>
+                                    <th class="no-sorting text-right" style="width:85px;">Actions</th>
                               </tr>
                           </thead>
                           <tbody>
                               <% @meetings.each do |meeting| %>
                                 <tr data-open-url="<%=  room_meetings_path(meeting) %>">
-                                    <td class="room_uppercase"><%= meeting.name %></td>
+                                    <td class="room_uppercase "><%= meeting.name %></td>
                                     <td class="room_uppercase"><%= meeting.description %></td>
                                     <td class="room_uppercase"><%= meeting.room_id %></td>
                                     <td class="room_uppercase"><%= meeting.meeting_dates.pluck(:date).map{|d| d.strftime('%d %B %Y')}.join(', ') %></td>
                                     <td class="room_uppercase"><%= meeting.time_start.strftime('%T') %></td>
                                     <td class="room_uppercase"><%= meeting.time_end.strftime('%T') %></td>
                                       <% if current_user %>
-                                          <td>
+                                          <td class="px-0">
                                           <div class="text-right">
                                           <%= link_to '<i class="material-icons">open_in_new</i> '.html_safe, room_meeting_path(meeting.room, meeting), data: {turbolinks: false}, class: 'btn tblActnBtn' %>
                                           <%= link_to '<i class="material-icons">edit</i> '.html_safe, edit_room_meeting_path(meeting.room, meeting), data: {turbolinks: false}, class: 'btn tblActnBtn' %>

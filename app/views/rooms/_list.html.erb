@@ -15,7 +15,7 @@
                                   <tr>
                                     <th>Room Name</th>
                                        <% if current_user %>
-                                        <th class="no-sorting text-right">Actions</th>
+                                        <th class="no-sorting text-right" style="width:85px;">Actions</th>
                                       <% end %>
                               </tr>
                           </thead>
@@ -24,7 +24,7 @@
                                 <tr data-open-url="<%= room_path(room) %>">
                                     <td class="room_uppercase"><%= room.name %></td>
                                       <% if current_user %>
-                                          <td>
+                                          <td class="px-0">
                                           <div class="text-right">
                                           <%= link_to '<i class="material-icons">open_in_new</i> '.html_safe, room_path(room), data: {turbolinks: false}, class: 'btn tblActnBtn' %>
                                           <%= link_to '<i class="material-icons">edit</i> '.html_safe, edit_room_path(room), data: {turbolinks: false}, class: 'btn tblActnBtn' %>

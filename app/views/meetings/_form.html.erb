@@ -56,9 +56,12 @@
     $('#error_explanation').html('');
     }
     $('.cancel_meeting_modal').on('click', function(e){
-      // e.preventDefault();
-      // $('.modal').modal('hide');
-  });
+      if ($('.modal').is(':visible')) {
+        e.preventDefault();
+        $('.modal').modal('hide');
+      }
+    });
+
   function init() {
     let dates = $('#date').data('selected');
     $('#date').flatpickr({
